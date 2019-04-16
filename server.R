@@ -1,6 +1,7 @@
 library(magrittr)
 library(dplyr)
 library(shiny)
+library(jsonlite)
 
 data = nycflights13::planes %>% 
   select(
@@ -12,7 +13,8 @@ data = nycflights13::planes %>%
     Engine = engine,
     Seats = seats,
     -speed
-    ) 
+    ) %>%
+  toJSON(dataframe = "rows")
 
 shinyServer(function(input, output, session) {
 	session$sendCustomMessage("init", data)
