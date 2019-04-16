@@ -12,7 +12,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@flourish/live-api": "^3.0.0",
+    "@flourish/live-api": "^3.0.1",
     "@flourish/transform-data": "0.0.1"
   },
   "devDependencies": {

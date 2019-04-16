@@ -21,7 +21,7 @@ function createSurvey(selector, arr) {
 		container: selector,
 		api_key: API_KEY,
 
-		column_names: { data: data.column_names	},
+		column_names: { questions: data.column_names	},
 
 		data: { questions: data, order: [], labels: [], colors: [], places: [], answer_groups: [] },
 		state: state
