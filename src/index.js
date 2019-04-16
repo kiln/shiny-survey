@@ -1,47 +1,43 @@
 import API from "@flourish/live-api";
 import API_KEY from "./lib/api-key";
+import { flourishifyObjects } from "@flourish/transform-data";
 
 
 function createSurvey(selector, arr) {
+	var columns_bindings = {
+		categorical: ["Year", "Type", "Manufacturer", "Model", "Engine"],
+		continuous: ["Engines", "Seats"],
+		metadata: ["Tailnum"]
+	};
 
-	console.log(arr)
-	// var data = { data: arr.map(function(d) { return { data: d }; }) };
+	var data = flourishifyObjects(arr, {}, columns_bindings);
 
-	// var state = {
-	// 	show_rug_plot: false,
-	// 	x_title: "Value",
-	// 	y_title: "Count"
-	// };
-
-
-	// var opts = {
-	// 	template: "@tim/histogram",
-	// 	version: "1",
-	// 	container: selector,
-	// 	api_key: API_KEY,
-
-	// 	column_names: {
-	// 		data: {
-	// 			data: "Value",
-	// 		}
-	// 	},
-
-	// 	data: data,
-	// 	state: state
-	// };
+	var state = {};
 
 
-	// var flourish_api = new API(opts);
+	var opts = {
+		template: "@flourish/survey",
+		version: "4.2.0",
+		container: selector,
+		api_key: API_KEY,
+
+		column_names: { data: data.column_names	},
+
+		data: { questions: data, order: [], labels: [], colors: [], places: [], answer_groups: [] },
+		state: state
+	};
 
 
-	// var updateGraphic = function(val) {
-	// 	state.bin_count = val;
-	// 	flourish_api.update(state, data);
-	// }
+	var flourish_api = new API(opts);
 
-	// updateGraphic();
 
-	// return updateGraphic
+	var updateGraphic = function() {
+		flourish_api.update(state, data);
+	};
+
+	updateGraphic();
+
+	return updateGraphic;
 }
 
 

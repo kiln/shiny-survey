@@ -12,13 +12,14 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@flourish/live-api": "1"
+    "@flourish/live-api": "^3.0.0",
+    "@flourish/transform-data": "0.0.1"
   },
   "devDependencies": {
     "@flourish/eslint-plugin-flourish": "^0.7.2",
-    "eslint": "^5.14.1",
+    "eslint": "^5.16.0",
     "husky": "^1.3.1",
-    "lint-staged": "^8.1.4",
+    "lint-staged": "^8.1.5",
     "rollup": "^0.67.4",
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-node-resolve": "^3.4.0"

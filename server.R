@@ -10,6 +10,7 @@ data = nycflights13::planes %>%
     Type = type,
     Manufacturer = manufacturer,
     Model = model,
+    Engines = engines,
     Engine = engine,
     Seats = seats,
     -speed
