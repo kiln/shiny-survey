@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{ headContent() }}
+    {{ bootstrapLib() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			html, body, #chart, iframe {
+				height: 100%;
+				width: 100%;
+				margin: 0;
+				border: 0;
+			}
+      .wrapper {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 800px;
+      }
+      @media screen and (max-width: 805px) {
+        .wrapper {
+          max-width: 80%;
+        }
+      }
+		</style>
+    <script src="histogram.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+        {{ slider }}
+        <div id="chart"></div>
+    </div>
+    <script>
+      Shiny.addCustomMessageHandler("init", function(data) {
+        var updateHisto = createHistogram("#chart", data);
+        Shiny.addCustomMessageHandler("update", function(value) {
+          updateHisto(value);
+        });
+      });
+    </script>
+  </body>
+</html>

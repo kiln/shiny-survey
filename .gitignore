@@ -1,0 +1,7 @@
+.DS_Store
+node_modules
+shiny-survey.Rproj
+.Rhistory
+.Rproj.user
+survey.js
+.RData
