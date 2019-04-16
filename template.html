@@ -22,7 +22,7 @@
         }
       }
 		</style>
-    <script src="histogram.js"></script>
+    <script src="survey.js"></script>
   </head>
   <body>
     <div class="wrapper">
@@ -31,10 +31,10 @@
     </div>
     <script>
       Shiny.addCustomMessageHandler("init", function(data) {
-        var updateHisto = createHistogram("#chart", data);
-        Shiny.addCustomMessageHandler("update", function(value) {
-          updateHisto(value);
-        });
+        var updateSurvey = createSurvey("#chart", data);
+        //Shiny.addCustomMessageHandler("update", function(value) {
+        //   updateHisto(value);
+        // });
       });
     </script>
   </body>

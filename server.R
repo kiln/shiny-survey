@@ -1,8 +1,18 @@
-library("shiny")
-source("lib/generateData.R")
+library(magrittr)
+library(dplyr)
+library(shiny)
 
-data = generateData()
-
+data = nycflights13::planes %>% 
+  select(
+    Tailnum = tailnum,
+    Year = year,
+    Type = type,
+    Manufacturer = manufacturer,
+    Model = model,
+    Engine = engine,
+    Seats = seats,
+    -speed
+    ) 
 
 shinyServer(function(input, output, session) {
 	session$sendCustomMessage("init", data)
