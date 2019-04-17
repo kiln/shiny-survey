@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint src",
     "build": "rollup -c",
+    "start": "nodemon  --ignore www/survey.js -x 'npm run build'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tim Brock",
@@ -22,7 +23,8 @@
     "lint-staged": "^8.1.5",
     "rollup": "^0.67.4",
     "rollup-plugin-json": "^3.1.0",
-    "rollup-plugin-node-resolve": "^3.4.0"
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "nodemon": "^1.18.10"
   },
   "lint-staged": {
     "*.js": "npm run lint --"
