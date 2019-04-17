@@ -12,7 +12,9 @@ function createSurvey(selector, arr) {
 
 	var data = flourishifyObjects(arr, {}, columns_bindings);
 
-	var state = {};
+	var state = {
+		popup: "<h2>Tailnum: {{Tailnum}}</h2>\n<p>Hi</p>"
+	};
 
 
 	var opts = {
