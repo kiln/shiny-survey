@@ -28,8 +28,11 @@ convertToJSON = function(d) {
 }
 
 shinyServer(function(input, output, session) {
-	session$sendCustomMessage("init", convertToJSON(data))
+	session$sendCustomMessage("init", list(data = convertToJSON(data), shape = "circle"))
 	observe({
-	  session$sendCustomMessage("update", convertToJSON(filterOnYear(input$year)))
+	  session$sendCustomMessage("updateData", convertToJSON(filterOnYear(input$year)))
+	})
+	observe({
+	  session$sendCustomMessage("updateShape", input$shape)
 	})
 })

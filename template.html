@@ -26,16 +26,22 @@
   </head>
   <body>
     <div class="wrapper">
-        {{ selector }}
+        {{ year_selector }}
+        {{ shape_buttons }}
         <div id="chart"></div>
     </div>
     <script>
-      Shiny.addCustomMessageHandler("init", function(data) {
-        console.log("init", data);
-        var updateSurvey = createSurvey("#chart", data);
-        Shiny.addCustomMessageHandler("update", function(filtered_data) {
-          console.log("update", filtered_data);
-          updateSurvey(filtered_data);
+      Shiny.addCustomMessageHandler("init", function(initial_values) {
+        var data = initial_values.data;
+        var shape = initial_values.shape;
+        var updateSurvey = createSurvey("#chart", data, shape);
+        Shiny.addCustomMessageHandler("updateData", function(filtered_data) {
+          data = filtered_data;
+          updateSurvey(data, shape);
+        });
+        Shiny.addCustomMessageHandler("updateShape", function(new_shape) {
+          shape = new_shape;
+          updateSurvey(data, shape);
         });
       });
     </script>

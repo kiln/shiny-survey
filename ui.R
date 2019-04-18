@@ -1,4 +1,5 @@
 library(shiny)
+library(shinyWidgets)
 library(magrittr)
 
 years = nycflights13::planes$year %>% 
@@ -6,5 +7,8 @@ years = nycflights13::planes$year %>%
   sort()
 
 htmlTemplate("template.html",
-             selector = selectInput("year", label = NULL, choices = c("All", years))
+             year_selector = selectInput("year", "Year", choices = c("All", years)),
+             shape_buttons = selectInput("shape", "Shape", 
+                                         choices = c("Circle" = "circle", "Triangle" = "triangle", "Square" = "square", "Hexagon" = "hexagon"),
+                                         )
              )

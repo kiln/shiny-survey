@@ -2,11 +2,20 @@ import API from "@flourish/live-api";
 import API_KEY from "./lib/api-key";
 import { flourishifyObjects } from "@flourish/transform-data";
 
-var selector;
+var selector, data, shape;
 
-function getOpts(input) {
+function getOpts() {
+	var dot_shape = "polygon";
+	if (shape === "circle") dot_shape = "circle";
+	else if (shape === "square") dot_shape = "square";
+
+	var dot_sides = 3;
+	if (shape === "hexagon") dot_sides = 6;
+
 	var state = {
-		popup: "<h2>Tailnum: {{Tailnum}}</h2>\n<p></p>"
+		popup: "<h2>Tailnum: {{Tailnum}}</h2>\n<p></p>",
+		dot_shape: dot_shape,
+		dot_sides: dot_sides
 	};
 
 	var columns_bindings = {
@@ -16,7 +25,7 @@ function getOpts(input) {
 	};
 
 
-	var data = flourishifyObjects(input, {}, columns_bindings);
+	var questions = flourishifyObjects(data, {}, columns_bindings);
 
 	var opts = {
 		template: "@flourish/survey",
@@ -24,9 +33,9 @@ function getOpts(input) {
 		container: selector,
 		api_key: API_KEY,
 
-		column_names: { questions: data.column_names },
+		column_names: { questions: questions.column_names },
 
-		data: { questions: data, order: [], labels: [], colors: [], places: [], answer_groups: [] },
+		data: { questions: questions, order: [], labels: [], colors: [], places: [], answer_groups: [] },
 		state: state
 	};
 
@@ -34,14 +43,18 @@ function getOpts(input) {
 }
 
 
-function createSurvey(_selector, arr) {
+function createSurvey(_selector, _data, _shape) {
 	selector = _selector;
+	data = _data;
+	shape = _shape;
 
-	var flourish_api = new API(getOpts(arr));
+	var flourish_api = new API(getOpts());
 
 
-	var updateGraphic = function(d) {
-		flourish_api.update(getOpts(d));
+	var updateGraphic = function(d, s) {
+		data = d;
+		shape = s;
+		flourish_api.update(getOpts());
 	};
 
 	// updateGraphic();
