@@ -1,3 +1,10 @@
 library(shiny)
+library(magrittr)
 
-htmlTemplate("template.html")
+years = nycflights13::planes$year %>% 
+  unique() %>% 
+  sort()
+
+htmlTemplate("template.html",
+             selector = selectInput("year", label = NULL, choices = c("All", years))
+             )

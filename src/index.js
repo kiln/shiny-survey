@@ -2,20 +2,21 @@ import API from "@flourish/live-api";
 import API_KEY from "./lib/api-key";
 import { flourishifyObjects } from "@flourish/transform-data";
 
+var selector;
 
-function createSurvey(selector, arr) {
+function getOpts(input) {
+	var state = {
+		popup: "<h2>Tailnum: {{Tailnum}}</h2>\n<p></p>"
+	};
+
 	var columns_bindings = {
-		categorical: ["Year", "Type", "Manufacturer", "Model", "Engine"],
+		categorical: ["Type", "Manufacturer", "Model", "Engine"],
 		continuous: ["Engines", "Seats"],
 		metadata: ["Tailnum"]
 	};
 
-	var data = flourishifyObjects(arr, {}, columns_bindings);
 
-	var state = {
-		popup: "<h2>Tailnum: {{Tailnum}}</h2>\n<p>Hi</p>"
-	};
-
+	var data = flourishifyObjects(input, {}, columns_bindings);
 
 	var opts = {
 		template: "@flourish/survey",
@@ -23,21 +24,27 @@ function createSurvey(selector, arr) {
 		container: selector,
 		api_key: API_KEY,
 
-		column_names: { questions: data.column_names	},
+		column_names: { questions: data.column_names },
 
 		data: { questions: data, order: [], labels: [], colors: [], places: [], answer_groups: [] },
 		state: state
 	};
 
+	return opts;
+}
 
-	var flourish_api = new API(opts);
+
+function createSurvey(_selector, arr) {
+	selector = _selector;
+
+	var flourish_api = new API(getOpts(arr));
 
 
-	var updateGraphic = function() {
-		flourish_api.update(state, data);
+	var updateGraphic = function(d) {
+		flourish_api.update(getOpts(d));
 	};
 
-	updateGraphic();
+	// updateGraphic();
 
 	return updateGraphic;
 }

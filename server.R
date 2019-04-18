@@ -14,12 +14,22 @@ data = nycflights13::planes %>%
     Engine = engine,
     Seats = seats,
     -speed
-    ) %>%
-  toJSON(dataframe = "rows")
+    )
+
+filterOnYear = function(y) {
+  if(y == "All"){
+    return(data)
+  } 
+  return(filter(data, Year == y))
+}
+
+convertToJSON = function(d) {
+  toJSON(d, dataframe = "rows")
+}
 
 shinyServer(function(input, output, session) {
-	session$sendCustomMessage("init", data)
+	session$sendCustomMessage("init", convertToJSON(data))
 	observe({
-	  session$sendCustomMessage("update", input$n_bins)
+	  session$sendCustomMessage("update", convertToJSON(filterOnYear(input$year)))
 	})
 })
