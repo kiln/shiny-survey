@@ -42,7 +42,6 @@ function getOpts() {
 	return opts;
 }
 
-
 function createSurvey(_selector, _data, _shape) {
 	selector = _selector;
 	data = _data;
@@ -56,8 +55,6 @@ function createSurvey(_selector, _data, _shape) {
 		shape = s;
 		flourish_api.update(getOpts());
 	};
-
-	// updateGraphic();
 
 	return updateGraphic;
 }

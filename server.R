@@ -1,9 +1,11 @@
+# Import packages, including shiny
 library(magrittr)
 library(dplyr)
 library(shiny)
 library(jsonlite)
 
-data = nycflights13::planes %>% 
+# Create new dataframe using nycflights R package
+data <- nycflights13::planes %>% 
   select(
     Tailnum = tailnum,
     Year = year,
@@ -16,17 +18,20 @@ data = nycflights13::planes %>%
     -speed
     )
 
-filterOnYear = function(y) {
+# Function to filter and return rows based on year input
+filterOnYear <- function(y) {
   if(y == "All"){
     return(data)
   } 
   return(filter(data, Year == y))
 }
 
-convertToJSON = function(d) {
+# Function which converts data dataframe to json object so it can be sent to Flourish API
+convertToJSON <- function(d) {
   toJSON(d, dataframe = "rows")
 }
 
+# TK on server sending messages to template.html
 shinyServer(function(input, output, session) {
 	session$sendCustomMessage("init", list(data = convertToJSON(data), shape = "circle"))
 	observe({
