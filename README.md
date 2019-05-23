@@ -23,5 +23,5 @@ shiny::runApp(".")
 
 To start the template server, in the terminal, run :
 ```
-npm start
+npm run start
 ```
