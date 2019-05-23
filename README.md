@@ -1,5 +1,5 @@
 # shiny-survey
-This is an initial example and exploration of how you can connect the API to use Flourish together with other data analysis and visualisation tools.
+This is an initial example and exploration of how you can connect the Flourish API together with other data analysis and visualisation tools.
 
 ## What you need
 * A working knowledge of both Javascript and R
