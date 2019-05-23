@@ -17,7 +17,7 @@ npm install
 
 To start the Shiny server, in the RStudio console, run:
 ```
-install.packages('shiny'); # if not already installed
+install.packages("shiny"); # if not already installed
 shiny::runApp(".")
 ```
 
