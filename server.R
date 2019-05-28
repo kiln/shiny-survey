@@ -5,7 +5,7 @@ library(shiny)
 library(jsonlite)
 
 # Create new dataframe using nycflights R package
-data <- nycflights13::planes %>% 
+data <- nycflights13::planes %>%
   select(
     Tailnum = tailnum,
     Year = year,
@@ -22,7 +22,7 @@ data <- nycflights13::planes %>%
 filterOnYear <- function(y) {
   if(y == "All"){
     return(data)
-  } 
+  }
   return(filter(data, Year == y))
 }
 
@@ -31,13 +31,16 @@ convertToJSON <- function(d) {
   toJSON(d, dataframe = "rows")
 }
 
-# TK on server sending messages to template.html
+# Initialise shiny server instance
 shinyServer(function(input, output, session) {
+  # Send a message to web page, with data and shape properties, as soon as session begins
 	session$sendCustomMessage("init", list(data = convertToJSON(data), shape = "circle"))
 	observe({
+    # Send a message to web page with new data when filter value is changed
 	  session$sendCustomMessage("updateData", convertToJSON(filterOnYear(input$year)))
 	})
 	observe({
+    # Send a message to web page with new shape when shape value is changed
 	  session$sendCustomMessage("updateShape", input$shape)
 	})
 })
