@@ -1,6 +1,5 @@
 # Import packages, including Shiny and Shiny Widgets
 library(shiny)
-library(shinyWidgets)
 library(magrittr)
 
 # Create list of years from nycflights data which can be used by year_selector to filter rows 
