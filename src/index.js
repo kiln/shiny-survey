@@ -1,6 +1,5 @@
 import API from "@flourish/live-api";
 import API_KEY from "./lib/api-key";
-import { flourishifyObjects } from "@flourish/transform-data";
 
 var selector, data, shape;
 
@@ -18,24 +17,21 @@ function getOpts() {
 		dot_sides: dot_sides
 	};
 
-	var columns_bindings = {
-		categorical: ["Type", "Manufacturer", "Model", "Engine"],
-		continuous: ["Engines", "Seats"],
-		metadata: ["Tailnum"]
-	};
-
-
-	var questions = flourishifyObjects(data, {}, columns_bindings);
-
 	var opts = {
 		template: "@flourish/survey",
 		version: "4.2.0",
 		container: selector,
 		api_key: API_KEY,
 
-		column_names: { questions: questions.column_names },
+		bindings: {
+			questions: {
+				categorical: ["Type", "Manufacturer", "Model", "Engine"],
+				continuous: ["Engines", "Seats"],
+				metadata: ["Tailnum"]
+			}
+		},
 
-		data: { questions: questions, order: [], labels: [], colors: [], places: [], answer_groups: [] },
+		data: { questions: data, order: [], labels: [], colors: [], places: [], answer_groups: [] },
 		state: state
 	};
 
