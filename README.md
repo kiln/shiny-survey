@@ -15,6 +15,14 @@ cd shiny-survey
 npm install
 ```
 
+The R side of this example uses four packages (shiny, dplyr, magrittr, jsonlite). If you don't have them installed, before you begin, open the RStudio console and run:
+```
+install.packages("shiny")
+install.packages("dplyr")
+install.packages("magrittr")
+install.packages("jsonlite")
+```
+
 To start the Shiny server, in the RStudio console, run:
 ```
 install.packages("shiny"); # if not already installed
