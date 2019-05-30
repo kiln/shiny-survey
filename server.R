@@ -1,8 +1,8 @@
 # Import packages, including shiny
-library(magrittr)
 library(dplyr)
-library(shiny)
 library(jsonlite)
+library(magrittr)
+library(shiny)
 
 # Create new dataframe using nycflights R package
 data <- nycflights13::planes %>%

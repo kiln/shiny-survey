@@ -1,6 +1,6 @@
 # Import packages, including Shiny and Shiny Widgets
-library(shiny)
 library(magrittr)
+library(shiny)
 
 # Create list of years from nycflights data which can be used by year_selector to filter rows 
 years <- nycflights13::planes$year %>% 
