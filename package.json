@@ -13,8 +13,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@flourish/live-api": "^3.0.1",
-    "@flourish/transform-data": "0.0.1"
+    "@flourish/live-api": "^4.2.0"
   },
   "devDependencies": {
     "@flourish/eslint-plugin-flourish": "^0.7.2",

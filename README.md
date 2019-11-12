@@ -8,15 +8,16 @@ This is an initial example and exploration of how you can connect the Flourish A
 * RStudio or some other IDE that can run a [Shiny app](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/)
 
 ## Running this example
-Clone this repository and install its dependencies:
-```
+Clone this repository, install its dependencies and build the JavaScript:
+``` bash
 git clone https://github.com/kiln/shiny-survey.git
 cd shiny-survey
 npm install
+npm run build
 ```
 
 The R side of this example uses four packages (shiny, dplyr, magrittr, jsonlite). If you don't have them installed, before you begin, open the RStudio console and run:
-```
+``` R
 install.packages("dplyr")
 install.packages("jsonlite")
 install.packages("magrittr")
@@ -24,12 +25,6 @@ install.packages("shiny")
 ```
 
 To start the Shiny server, in the RStudio console, run:
-```
-install.packages("shiny"); # if not already installed
-shiny::runApp(".")
-```
-
-To start the template server, in the terminal, run :
-```
-npm run start
+``` R
+shiny::runApp(".", launch.browser = TRUE)
 ```
